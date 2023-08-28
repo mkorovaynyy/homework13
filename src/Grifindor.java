@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-public class Grifindor extends Hogwarts implements Comparator<Grifindor> {
+public class Grifindor extends Hogwarts implements Comparable<Grifindor> {
     private int nobility;
     private int honor;
     private int bravery;
@@ -24,18 +24,22 @@ public class Grifindor extends Hogwarts implements Comparator<Grifindor> {
         return bravery;
     }
 
+    public int calculateProperties(Grifindor grifindor) {
+        return grifindor.getHonor() + grifindor.getBravery() + grifindor.getNobility();
+    }
+
     @Override
-    public int compare(Grifindor o1, Grifindor o2) {
-        int sum1 = o1.getNobility() + o1.getBravery() + o1.getHonor();
-        int sum2 = o2.getNobility() + o2.getBravery() + o2.getHonor();
-        if(sum1 > sum2) {
-            System.out.println(o1.getName() + " лучший Грифиндорец, чем " + o2.getName());
+    public int compareTo(Grifindor o) {
+        int sum1 = calculateProperties(this);
+        int sum2 = o.getNobility() + o.getBravery() + o.getHonor();
+        if (sum1 > sum2) {
+            System.out.println(this.getName() + " лучший Грифиндорец, чем " + o.getName());
             return 1;
         } else if (sum1 == sum2) {
-            System.out.println(o1.getName() + " и " + o2.getName() + " одинаковые грифиндорцы");
+            System.out.println(this.getName() + " и " + o.getName() + " одинаковые грифиндорцы");
             return 0;
         } else {
-            System.out.println(o2.getName() + " лучший Грифиндорец, чем " + o1.getName());
+            System.out.println(o.getName() + " лучший Грифиндорец, чем " + this.getName());
             return -1;
         }
     }

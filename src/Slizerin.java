@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-public class Slizerin extends Hogwarts implements Comparator<Slizerin> {
+public class Slizerin extends Hogwarts implements Comparable<Slizerin> {
     private int trick;
     private int determination;
     private int ambition;
@@ -24,18 +24,21 @@ public class Slizerin extends Hogwarts implements Comparator<Slizerin> {
         return ambition;
     }
 
+    public int calculateProperties(Slizerin slizerin) {
+        return slizerin.getTrick() + slizerin.getDetermination() + slizerin.getAmbition();
+    }
     @Override
-    public int compare(Slizerin o1, Slizerin o2) {
-        int sum1 = o1.getAmbition() + o1.getDetermination() + o1.getTrick();
-        int sum2 = o2.getAmbition() + o2.getDetermination() + o2.getTrick();
+    public int compareTo(Slizerin o) {
+        int sum1 = calculateProperties(this);
+        int sum2 = calculateProperties(o);
         if (sum1 > sum2) {
-            System.out.println(o1.getName() + " лучший Слизеринец, чем " + o2.getName());
+            System.out.println(this.getName() + " лучший Слизеринец, чем " + o.getName());
             return 1;
         } else if (sum1 == sum2) {
-            System.out.println(o1.getName() + " и " + o2.getName() + " одинаковые Слизеренцы");
+            System.out.println(this.getName() + " и " + o.getName() + " одинаковые Слизеренцы");
             return 0;
         } else {
-            System.out.println(o2.getName() + " лучший Слизеринец, чем " + o1.getName());
+            System.out.println(o.getName() + " лучший Слизеринец, чем " + this.getName());
             return -1;
         }
     }

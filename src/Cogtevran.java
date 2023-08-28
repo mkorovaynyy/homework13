@@ -1,7 +1,7 @@
 import java.util.Comparator;
 import java.util.Random;
 
-public class Cogtevran extends Hogwarts implements Comparator<Cogtevran> {
+public class Cogtevran extends Hogwarts implements Comparable<Cogtevran> {
     private int mind;
     private int wisdom;
     private int creativity;
@@ -24,19 +24,21 @@ public class Cogtevran extends Hogwarts implements Comparator<Cogtevran> {
     public int getCreativity() {
         return creativity;
     }
-
+    public int calculateProperties(Cogtevran cogtevran) {
+        return cogtevran.getCreativity() + cogtevran.getMind() + cogtevran.getWisdom();
+    }
     @Override
-    public int compare(Cogtevran o1, Cogtevran o2) {
-        int sum1 = o1.getCreativity() + o1.getMind() + o1.getWisdom();
-        int sum2 = o2.getCreativity() + o2.getMind() + o2.getWisdom();
+    public int compareTo(Cogtevran o) {
+        int sum1 = calculateProperties(this);
+        int sum2 = calculateProperties(o);
         if(sum1 > sum2) {
-            System.out.println(o1.getName() + " лучший Когтевранец, чем " + o2.getName());
+            System.out.println(this.getName() + " лучший Когтевранец, чем " + o.getName());
             return 1;
         } else if (sum1 == sum2) {
-            System.out.println(o1.getName() + " и " + o2.getName() + " одинаковые когтевранцы");
+            System.out.println(this.getName() + " и " + o.getName() + " одинаковые когтевранцы");
             return 0;
         } else {
-            System.out.println(o2.getName() + " лучший Когтевранец, чем " + o1.getName());
+            System.out.println(o.getName() + " лучший Когтевранец, чем " + this.getName());
             return -1;
         }
     }

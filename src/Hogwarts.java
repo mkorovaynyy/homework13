@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Hogwarts {
+public abstract class Hogwarts {
     private String name;
     private int spellPower;
     private int distanceOfTransgression;

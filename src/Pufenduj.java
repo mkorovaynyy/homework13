@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-public class Pufenduj extends Hogwarts implements Comparator<Pufenduj> {
+public class Pufenduj extends Hogwarts implements Comparable<Pufenduj> {
     private int industriousness;
     private int loyalty;
     private int honesty;
@@ -24,18 +24,21 @@ public class Pufenduj extends Hogwarts implements Comparator<Pufenduj> {
         return honesty;
     }
 
+    public int calculateProperties(Pufenduj pufenduj) {
+        return pufenduj.getLoyalty() + pufenduj.getLoyalty() + pufenduj.getIndustriousness();
+    }
     @Override
-    public int compare(Pufenduj o1, Pufenduj o2) {
-        int sum1 = o1.getHonesty() + o1.getIndustriousness() + o1.getLoyalty();
-        int sum2 = o2.getHonesty() + o2.getIndustriousness() + o2.getLoyalty();
+    public int compareTo(Pufenduj o) {
+        int sum1 = calculateProperties(this);
+        int sum2 = o.getHonesty() + o.getIndustriousness() + o.getLoyalty();
         if (sum1 > sum2) {
-            System.out.println(o1.getName() + " лучший Пуффендуец, чем " + o2.getName());
+            System.out.println(this.getName() + " лучший Пуффендуец, чем " + o.getName());
             return 1;
         } else if (sum1 == sum2) {
-            System.out.println(o1.getName() + " и " + o2.getName() + " одинаковые Пуфендуйцы");
+            System.out.println(this.getName() + " и " + o.getName() + " одинаковые Пуфендуйцы");
             return 0;
         } else {
-            System.out.println(o2.getName() + " лучший Пуффендуец, чем " + o1.getName());
+            System.out.println(o.getName() + " лучший Пуффендуец, чем " + this.getName());
             return -1;
         }
     }
